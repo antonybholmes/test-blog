@@ -4,8 +4,8 @@
   "description": "",
   "main": ".eleventy.js",
   "scripts": {
-    "build": "npx eleventy",
-    "serve": "npx eleventy --serve",
+    "build": "ELEVENTY_PRODUCTION=true eleventy & NODE_ENV=production npx tailwindcss -i src/styles/tailwind.css -c src/styles/tailwind.config.js -o _site/style.css --minify",
+    "serve": "eleventy --serve & npx tailwindcss -i src/styles/tailwind.css -c src/styles/tailwind.config.js -o _site/style.css --watch",
     "debug": "DEBUG=* npx eleventy"
   },
   "keywords": [],
@@ -13,5 +13,8 @@
   "license": "ISC",
   "dependencies": {
     "dayjs": "^1.10.7"
+  },
+  "devDependencies": {
+    "html-minifier": "^4.0.0"
   }
 }
