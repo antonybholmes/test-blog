@@ -21,7 +21,7 @@ jobs:
         run: yarn install
 
       - name: Build the website
-        run: npx @11ty/eleventy
+        run: yarn build
       
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v1
