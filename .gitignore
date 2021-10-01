@@ -1,5 +1,5 @@
 # _site is where the static generated files are copied to
 _site/
-
+_tmp
 node_modules/
 .idea/

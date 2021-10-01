@@ -4,7 +4,7 @@
   "description": "",
   "main": ".eleventy.js",
   "scripts": {
-    "build": "ELEVENTY_PRODUCTION=true npx @11ty/eleventy & NODE_ENV=production npx tailwindcss -i src/css/tailwind.css -c tailwind.config.js -o _tmp/style.css --minify & NODE_ENV=production npx postcss _tmp/style.css -o _site/css/style.min.css",
+    "build": "ELEVENTY_PRODUCTION=true npx @11ty/eleventy & NODE_ENV=production npx tailwindcss -i src/css/tailwind.css -c tailwind.config.js -o _tmp/tmp.css --minify & NODE_ENV=production npx postcss _tmp/tmp.css -o _site/css/style.min.css",
     "serve": "npx @11ty/eleventy --serve & npx tailwindcss -i src/css/tailwind.css -c tailwind.config.js -o _site/css/style.min.css --watch",
     "debug": "DEBUG=* npx eleventy"
   },
