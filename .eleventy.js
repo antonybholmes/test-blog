@@ -1,10 +1,42 @@
 const dayjs = require("dayjs")
-
+const Image = require("@11ty/eleventy-img");
 const htmlmin = require("html-minifier")
 
 const now = String(Date.now())
 
+async function imageShortcode(src, alt, sizes) {
+  let metadata = await Image(src, {
+    outputDir: "_site/img/",
+    widths: [300, 640, 768, 1024, 1280, 1536],
+    formats: ["webp", "jpeg"]
+  });
+
+  let imageAttributes = {
+    alt,
+    sizes,
+    loading: "lazy",
+    decoding: "async",
+  };
+
+  // You bet we throw an error on missing alt in `imageAttributes` (alt="" works okay)
+  return Image.generateHTML(metadata, imageAttributes);
+}
+
 module.exports = (eleventyConfig) => {
+  //eleventyConfig.addPassthroughCopy("src/img")
+
+  // eleventyConfig.setBrowserSyncConfig({
+	// 	files: './_site/css/**/*.css'
+	// })
+
+  eleventyConfig.addPassthroughCopy({
+    './node_modules/alpinejs/dist/cdn.js': './js/alpine.js',
+  })
+
+  eleventyConfig.addNunjucksAsyncShortcode("image", imageShortcode)
+  //eleventyConfig.addLiquidShortcode("image", imageShortcode)
+  //eleventyConfig.addJavaScriptFunction("image", imageShortcode)
+
   eleventyConfig.addShortcode("excerpt", (article) => extractExcerpt(article))
 
   eleventyConfig.addFilter("dateIso", (date) => {
@@ -15,8 +47,8 @@ module.exports = (eleventyConfig) => {
     return dayjs(date).format("MMM DD, YYYY") // E.g. May 31, 2019
   })
 
-  eleventyConfig.addWatchTarget("./styles/tailwind.config.js")
-  eleventyConfig.addWatchTarget("./styles/tailwind.css")
+  eleventyConfig.addWatchTarget("./tailwind.config.js")
+  eleventyConfig.addWatchTarget("./src/css/tailwind.css")
 
   eleventyConfig.addShortcode("version", function () {
     return now

@@ -1,6 +1,10 @@
 {% extends "layouts/base.njk" %} {% block content %}
 <article>
   <h1>{{ title }}</h1>
+  <h2>s {{ page.url }}</h2>
+
+ {% image "./src/img/img1.png", "photo of my cat", "(min-width: 30em) 50vw, 100vw" %}
+ 
   {{ content | safe }}
 </article>
 {% endblock %}
